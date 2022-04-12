@@ -1,13 +1,123 @@
+:root {
+  --primary-color: rgba(35, 159, 233, 1.00);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.header {
+  background-color: var(--primary-color);
+  overflow: hidden;
+  font-size: 1em;
+}
+
+.headercontainer {
+  display: flex;
+  justify-content: space-around;
+  width: 80%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.mainsection {
+  overflow: hidden;
+  min-height: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  background-color: rgb(40, 37, 37);
+}
+
+.workoutcontainer {
+  box-shadow: 0.1em 0.1em 0.5em black;
+  border-radius: 0.5em;
+  border: 1px solid var(--primary-color);
+  padding: 0.5em;
+  color: white;
+  background-color: rgb(53, 51, 51);
+}
+
+/*
+form
+*/
+.formcontainer{
+  margin: 0 auto;
+  background-color: white;
+  padding: 3em 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 4px solid var(--primary-color);
+  border-radius: .5em;
+  flex-basis: 20em;
+  width: 60%;
+}
+
+.formcontainer h2, h3, p {
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+  width: 30%;
+  /*
+  text-align: right;
+  */
+}
+
+input, select{
+  width: 60%;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 100%;
+  
+}
+
+input:focus, select:focus {
+  border-color: #000;
+}
+
+.labelinputcontainer {
+  margin-top: 1em;
+}
+
+.button {
+  margin-top: 1em;
+  margin-left: 30%;
+  margin-bottom: 1em;
+}
+
+.buttoncolour {
+  background-color: var(--primary-color);
+}
+
+.programsbox .formcontainer {
+  width: 90%;
+}
+
+/*
+filter form
+*/
+.filterform {
+  flex-basis: 20em;
+  margin: 1em auto;
+  text-align: center;
+}
+
+.filterform input {
+  border: solid 2px white;
+  border-radius: 0.2em;
+  text-align: center;
+  width: 100%;
 }
