@@ -1,0 +1,9 @@
+export const GET_WORKOUTS = 'GET_WORKOUTS';
+export const ADD_WORKOUT = 'ADD_WORKOUT';
+export const DELETE_WORKOUT = 'DELETE_WORKOUT';
+export const UPDATE_WORKOUT = 'UPDATE_WORKOUT';
+export const SET_CURRENT = 'SET_CURRENT';
+export const CLEAR_CURRENT = 'CLEAR_CURRENT';
+export const SET_LOADING = 'SET_LOADING';
+export const WORKOUTS_ERROR = 'WORKOUTS_ERROR';
+export const CLEAR_WORKOUTS = 'CLEAR_WORKOUTS';
