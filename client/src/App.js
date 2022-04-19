@@ -1,12 +1,15 @@
 import { Provider } from 'react-redux';
 import store from './store'; 
+import Header from './components/layout/Header';
+import Workouts from './components/workouts/Workouts';
 
 const App = () => {
   return (
     <Provider store={store}>
-    <div className="App">
-      <h1>Hello From React</h1>
-    </div>
+      <>
+        <Header/>
+        <Workouts/>
+      </>
     </Provider>
   );
 }
