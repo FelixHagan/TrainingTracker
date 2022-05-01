@@ -18,6 +18,15 @@ code {
   font-size: 1em;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+ul {
+  list-style: none;
+}
+
 .headercontainer {
   display: flex;
   justify-content: space-around;
@@ -27,24 +36,28 @@ code {
 }
 
 .mainsection {
-  overflow: hidden;
   min-height: 800px;
+  background-color: rgb(40, 37, 37);
+}
+
+.mainsectioncontainer {
+  overflow: hidden;
   width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   margin: 0 auto;
-  background-color: rgb(40, 37, 37);
 }
 
 .workoutcontainer {
   box-shadow: 0.1em 0.1em 0.5em black;
   border-radius: 0.5em;
   border: 1px solid var(--primary-color);
+  margin: 1em;
   padding: 0.5em;
   color: white;
   background-color: rgb(53, 51, 51);
+  flex-basis: 80%;
+  text-align: center;
 }
 
 /*
