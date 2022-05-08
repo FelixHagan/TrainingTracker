@@ -53,7 +53,7 @@ router.put('/:id', auth, async (req, res) => {
 
     if (name) workoutProperties.name = name;
     if (description) workoutProperties.description = description;
-    if (perceivedEffort) workoutProperties.percievedEffort = percievedEffort;
+    if (perceivedEffort) workoutProperties.perceivedEffort = perceivedEffort;
 
     try {
         let updateWorkout = Workout.findById(req.params.id);

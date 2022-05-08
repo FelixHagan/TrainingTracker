@@ -4,22 +4,24 @@ import PropTypes from 'prop-types';
 import { getWorkouts } from '../../actions/workoutActions';
 import { loadUser } from '../../actions/authActions';
 import WorkoutItem from './WorkoutItem';
+import WorkoutForm from './WorkoutForm';
 
 const Workouts = ({ workout: { workouts, loading }, getWorkouts, loadUser }) => {
     useEffect(() => {
         loadUser();
+        getWorkouts();
     }, []);
 
-    /*
-    useEffect(() => {
-        getWorkouts();
-    }, [])
+    const [showForm, setShowForm] = useState(false);
 
+    const showTheForm = () => {
+        setShowForm(!showForm);
+    }
 
     if (loading || workouts === null) {
         return <p>Loading...</p>
     }
-    */
+    /*
    const [theWorkouts, setTheWorkouts] = useState([{
        id: 12,
        user: 1,
@@ -28,12 +30,18 @@ const Workouts = ({ workout: { workouts, loading }, getWorkouts, loadUser }) => 
        percievedEffort: 4,
        date: "4/03/2022"
    }]);
-
+*/
   return (
       <div className='mainsection'>
+        <div className='addbutton'>
+            {showForm ? <button onClick={showTheForm} style={{backgroundColor: "red"}}>x</button> : <button onClick={showTheForm}>+</button> }
+            
+        </div>
         <div className='mainsectioncontainer'>
-            {theWorkouts.length === 0 ? <p>No workouts to show</p> :
-                (theWorkouts.map(workout => <WorkoutItem workout={workout} key={workout.id} />))
+           
+            {showForm && <WorkoutForm showTheForm={showTheForm}/>}
+            {workouts.length === 0 ? <h1>No workouts to show</h1> :
+                (workouts.map(workout => <WorkoutItem eachWorkout={workout} key={workout._id}/>))
             }
         </div>
     </div>
