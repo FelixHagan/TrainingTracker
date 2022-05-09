@@ -77,7 +77,7 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
             />
         </div>
         
-        <input type="submit" value="Add New Workout" className="buttoncolour"/>
+        <input type="submit" value={current ? "Update Workout" : "Add New Workout"} className="buttoncolour"/>
     </form>
     </div>
   )

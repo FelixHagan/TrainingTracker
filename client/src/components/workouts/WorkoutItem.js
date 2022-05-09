@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import WorkoutForm from './WorkoutForm';
-import { setCurrent, deleteWorkout } from '../../actions/workoutActions';
+import { setCurrent, deleteWorkout, clearCurrent } from '../../actions/workoutActions';
 
-const WorkoutItem = ({ eachWorkout, setCurrent, deleteWorkout }) => {
+const WorkoutItem = ({ eachWorkout, setCurrent, deleteWorkout, clearCurrent }) => {
 
   const [showForm, setShowForm] = useState(false);
 
@@ -27,6 +27,11 @@ const WorkoutItem = ({ eachWorkout, setCurrent, deleteWorkout }) => {
       setCurrent(eachWorkout);
     }
 
+    const cancelUpdate = () => {
+      showTheForm();
+      clearCurrent();
+    }
+
     const deleteTheWorkout = () => {
       deleteWorkout(_id);
     }
@@ -44,7 +49,7 @@ const WorkoutItem = ({ eachWorkout, setCurrent, deleteWorkout }) => {
       </div>
        
       <div className='buttoncontainer'>
-        <button onClick={updateTheWorkout}>Update</button>
+        {showForm ? <button onClick={cancelUpdate}>Cancel</button> :  <button onClick={updateTheWorkout}>Update</button> }
         <button onClick={deleteTheWorkout}>Delete</button>
       </div>
       
@@ -59,4 +64,4 @@ const mapStateToProps = (state) => ({
   workout: state.workout
 })
 
-export default connect(mapStateToProps, { setCurrent, deleteWorkout })(WorkoutItem)
+export default connect(mapStateToProps, { setCurrent, deleteWorkout, clearCurrent })(WorkoutItem)
