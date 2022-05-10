@@ -5,8 +5,9 @@ import { getWorkouts } from '../../actions/workoutActions';
 import { loadUser } from '../../actions/authActions';
 import WorkoutItem from './WorkoutItem';
 import WorkoutForm from './WorkoutForm';
+import WorkoutFilter from './WorkoutFilter';
 
-const Workouts = ({ workout: { workouts, loading }, getWorkouts, loadUser }) => {
+const Workouts = ({ workout: { workouts, loading, filtered }, getWorkouts, loadUser }) => {
     useEffect(() => {
         loadUser();
         getWorkouts();
@@ -33,6 +34,13 @@ const Workouts = ({ workout: { workouts, loading }, getWorkouts, loadUser }) => 
 */
   return (
       <div className='mainsection'>
+          <div className='mainsectioncontainer'>
+            <div className='filterform'>
+                <WorkoutFilter />
+            </div>
+          </div>
+          
+          
         <div className='addbutton'>
             {showForm ? <button onClick={showTheForm} style={{backgroundColor: "red"}}>x</button> : <button onClick={showTheForm}>+</button> }
             
@@ -40,9 +48,11 @@ const Workouts = ({ workout: { workouts, loading }, getWorkouts, loadUser }) => 
         <div className='mainsectioncontainer'>
            
             {showForm && <WorkoutForm showTheForm={showTheForm}/>}
-            {workouts.length === 0 ? <h1>No workouts to show</h1> :
-                (workouts.map(workout => <WorkoutItem eachWorkout={workout} key={workout._id}/>))
+            {filtered ? (filtered.map(workout => <WorkoutItem eachWorkout={workout} key={workout._id}/>)) : 
+                (workouts.length === 0 ? <h1>No workouts to show</h1> :
+                    (workouts.map(workout => <WorkoutItem eachWorkout={workout} key={workout._id}/>)))
             }
+          
         </div>
     </div>
   )

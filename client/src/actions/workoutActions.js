@@ -1,4 +1,4 @@
-import { GET_WORKOUTS, SET_LOADING, WORKOUTS_ERROR, ADD_WORKOUT, UPDATE_WORKOUT, DELETE_WORKOUT, SET_CURRENT, CLEAR_CURRENT, CLEAR_WORKOUTS } from "./types";
+import { GET_WORKOUTS, SET_LOADING, WORKOUTS_ERROR, ADD_WORKOUT, UPDATE_WORKOUT, DELETE_WORKOUT, SET_CURRENT, CLEAR_CURRENT, CLEAR_WORKOUTS, FILTER_WORKOUTS, CLEAR_FILTER } from "./types";
 import axios from 'axios';
 
 // Get workouts from server
@@ -111,5 +111,20 @@ export const clearCurrent = () => async dispatch => {
 export const clearWorkouts = () => async dispatch => {
     dispatch({
         type: CLEAR_WORKOUTS
+    });
+}
+
+// Filter workouts
+export const filterWorkouts = (text) => async dispatch => {
+    dispatch({
+        type: FILTER_WORKOUTS,
+        payload: text
+    });
+}
+
+// Clear filter
+export const clearFilter = () => async dispatch => {
+    dispatch({
+        type: CLEAR_FILTER
     });
 }
