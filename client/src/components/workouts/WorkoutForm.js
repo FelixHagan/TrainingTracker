@@ -36,10 +36,11 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
   return (
     <div className="formcontainer">
     <form onSubmit={onSubmit}>
-        <h2>Add A New Workout</h2>
+        <h2>{current ? "Update Workout" : "Add A New Workout"}</h2>
 
         <div className="labelinputcontainer">
             <label htmlFor='name'>Name:</label>
+            {/*}
             <input 
                 type='name'
                 placeholder='Name'
@@ -49,6 +50,12 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
                 onChange={onChange}
                 required
                 />
+  {*/}
+                <select name='name' value={name} onChange={onChange}>
+                    <option name='Cycle'>Cycle</option>
+                    <option name='Run'>Run</option>
+                    <option name='Swim'>Swim</option>
+                </select>
             </div>
 
         <div className="labelinputcontainer">
