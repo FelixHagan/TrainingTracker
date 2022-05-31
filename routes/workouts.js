@@ -26,14 +26,15 @@ router.post('/', [ auth, [ check('name', 'Name is required').not().isEmpty(), ch
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { user, name, description, perceivedEffort } = req.body;
+    const { user, name, description, perceivedEffort, newWeek } = req.body;
 
     try {
         let newWorkout = new Workout({
             user,
             name,
             description, 
-            perceivedEffort
+            perceivedEffort,
+            newWeek
         });
 
         const theWorkout = await newWorkout.save();

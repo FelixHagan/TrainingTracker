@@ -20,6 +20,10 @@ const WorkoutSchema = mongoose.Schema({
     date: {
         type: Date,
         default: Date.now
+    },
+    newWeek: {
+        type: Boolean,
+        default: false
     }
 })
 

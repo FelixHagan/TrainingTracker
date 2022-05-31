@@ -3,12 +3,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addWorkout, updateWorkout, clearCurrent } from '../../actions/workoutActions';
 
-const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user }, showTheForm, workout: { current } }) => {
+const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user }, showTheForm, workout: { current, workouts } }) => {
+    
+    const isDateInThisWeek = (date) => {
+        const todayObj = new Date();
+        const monthNum = todayObj.getDate();
+        const dayNum = todayObj.getDay();
+      
+        // get first date of week
+        const firstDayOfWeek = new Date(todayObj.setDate(monthNum - dayNum));
+      
+        // get last date of week
+        const lastDayOfWeek = new Date(firstDayOfWeek);
+        lastDayOfWeek.setDate(lastDayOfWeek.getDate() + 6);
+        // if date is equal or within the first and last dates of the week
+        return date >= firstDayOfWeek && date <= lastDayOfWeek;
+    }
+    
     const [newWorkout, setNewWorkout] = useState({
         user: user._id,
-        name: "",
+        name: "Cycle",
         description: "",
-        perceivedEffort: ""
+        perceivedEffort: 1,
+        newWeek: !isDateInThisWeek(new Date(workouts[workouts.length-1].date))
     });
 
     useEffect(() => {
@@ -17,7 +34,7 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
         }
     }, [current]);
 
-    const { name, description, perceivedEffort } = newWorkout;
+    const { name, description, perceivedEffort, newWeek } = newWorkout;
 
      // runs when the user types in the form
      const onChange = e => setNewWorkout({ ...newWorkout, [e.target.name]: e.target.value});
@@ -52,14 +69,15 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
                 />
   {*/}
                 <select name='name' value={name} onChange={onChange}>
-                    <option name='Cycle'>Cycle</option>
-                    <option name='Run'>Run</option>
-                    <option name='Swim'>Swim</option>
+                    <option>Cycle</option>
+                    <option>Run</option>
+                    <option>Swim</option>
                 </select>
             </div>
 
         <div className="labelinputcontainer">
             <label htmlFor='perceivedEffort'>Perceived Effort:</label>
+            {/*}
             <input 
                 type='perceivedEffort'
                 placeholder='perceivedEffort'
@@ -69,6 +87,14 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
                 onChange={onChange}
                 required
                 />
+{*/}
+            <select name='perceivedEffort' value={perceivedEffort} onChange={onChange}>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
         </div>
 
         <div className="labelinputcontainer">
