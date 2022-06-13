@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { registerUser } from '../../actions/authActions';
+import { registerUser, clearErrors } from '../../actions/authActions';
 
-const Register = ({ registerUser }) => {
+const Register = ({ registerUser, clearErrors, auth: { error } }) => {
     const navigate = useNavigate();
 
     const [user, setUser] = useState({
@@ -39,8 +39,19 @@ const Register = ({ registerUser }) => {
         }
     }
 
+     // runs if error changes
+     useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                clearErrors();
+            }, 2000 )
+        }
+    }, [error, clearErrors]);
+
   return (
-    <div className="formcontainer">
+    <>
+    {error ? <div className='errorbox'><p>{error}</p></div> : 
+        <div className="formcontainer">
         <form onSubmit={onSubmit}>
             <h2>Register</h2>
             
@@ -101,6 +112,8 @@ const Register = ({ registerUser }) => {
             <input type="submit" value="Register" className="buttoncolour button"/>
         </form>
     </div>
+    }
+    </>
   )
 }
 
@@ -113,4 +126,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { registerUser })(Register)
+export default connect(mapStateToProps, { registerUser, clearErrors })(Register)

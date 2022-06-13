@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { loginUser } from '../../actions/authActions';
+import { loginUser, clearErrors } from '../../actions/authActions';
 
-const Login = ({ loginUser }) => {
+const Login = ({ loginUser, clearErrors, auth: { error } }) => {
     const navigate = useNavigate();
 
     const [theUser, setTheUser] = useState({
@@ -30,12 +30,24 @@ const Login = ({ loginUser }) => {
                 email: "",
                 password: ""
             });
+            
             await navigate('/');
         }
     }
 
+    // runs if error changes
+    useEffect(() => {
+        if (error) {
+            setTimeout(() => {
+                clearErrors();
+            }, 2000 )
+        }
+    }, [error, clearErrors]);
+
   return (
-    <div className="formcontainer">
+    <>
+    {error ? <div className='errorbox'><p>{error}</p></div> : 
+        <div className="formcontainer">
         <form onSubmit={onSubmit}>
             <h2>Login</h2>
             
@@ -69,6 +81,9 @@ const Login = ({ loginUser }) => {
             <input type="submit" value="Login" className="buttoncolour button"/>
         </form>
     </div>
+    }
+    
+    </>
   )
 }
 
@@ -81,4 +96,4 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 });
 
-export default connect(mapStateToProps, { loginUser })(Login)
+export default connect(mapStateToProps, { loginUser, clearErrors })(Login)
