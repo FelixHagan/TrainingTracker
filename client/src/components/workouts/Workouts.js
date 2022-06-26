@@ -22,6 +22,17 @@ const Workouts = ({ workout: { workouts, loading, filtered }, getWorkouts, loadU
         }
     }, [workouts]);
 
+
+    const [methodType, setMethodType] = useState(null);
+
+    const methodCalled = (theType) => {
+        setMethodType(theType);
+        setTimeout(() => {
+            setMethodType(null);
+        }, 3000)
+    }
+
+
     const [showForm, setShowForm] = useState(false);
 
     // loop through the workouts and sort into weeks
@@ -51,6 +62,16 @@ const Workouts = ({ workout: { workouts, loading, filtered }, getWorkouts, loadU
         setShowForm(!showForm);
     }
 
+    const scrollToBottom = () => window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: 'smooth'
+    });
+
+    const scrollToTop = () => window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+
     if (loading || workouts === null) {
         return <p>Loading...</p>
     }
@@ -63,21 +84,25 @@ const Workouts = ({ workout: { workouts, loading, filtered }, getWorkouts, loadU
             </div>
           </div>
           
-          
+        
         <div className='addbutton'>
             {showForm ? <button onClick={showTheForm} style={{backgroundColor: "red"}}>x</button> : <button onClick={showTheForm}>+</button> }
-            
         </div>
+        
+            
+        
+
         <div className='mainsectioncontainer'>
-           
-            {showForm && <WorkoutForm showTheForm={showTheForm}/>}
-            {filtered ? (filtered.map(workout => <WorkoutItem eachWorkout={workout} key={workout._id}/>)) : 
-                (workouts.length === 0 ? <h1>No workouts to show</h1> :
-                /*
-                    (workouts.map((workout) => 
-                    <Fragment key={workout._id}>    
-                    {workout.newWeek && <WorkoutWeek /> }
-  <WorkoutItem eachWorkout={workout} /></Fragment>))*/
+            {workouts.length > 2 && !showForm && 
+                <div className='scrollbutton'>
+                    <button onClick={scrollToBottom}>View most recent</button>
+                </div>
+            }
+            {methodType && <div className='messagecontainer'>{methodType}</div>}
+            {showForm && <WorkoutForm showTheForm={showTheForm} methodCalled={methodCalled}/>}
+            {filtered && workouts.length > 0 ? (filtered.map(workout => <WorkoutItem eachWorkout={workout} key={workout._id}/>)) : 
+                (workouts.length === 0 ? <div className='noworkoutmsg'><h1>No workouts to show</h1></div> :
+
                    (sortedWorkouts && sortedWorkouts.map((week, index) => 
                    <Fragment key={index}>
                     <WorkoutWeek numOfWorkouts={week.length} weeksWorkouts={week}/>
@@ -86,8 +111,14 @@ const Workouts = ({ workout: { workouts, loading, filtered }, getWorkouts, loadU
                 )
 
             }
+            {workouts.length > 2 && !showForm && 
+                <div className='scrollbutton'>
+                    <button onClick={scrollToTop}>Scroll to top</button>
+                </div>
+            }
           
         </div>
+        
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addWorkout, updateWorkout, clearCurrent } from '../../actions/workoutActions';
 
-const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user }, showTheForm, workout: { current, workouts } }) => {
+const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, methodCalled, auth: { user }, showTheForm, workout: { current, workouts } }) => {
     
     const isDateInThisWeek = (date) => {
         const todayObj = new Date();
@@ -25,7 +25,7 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
         name: "Cycle",
         description: "",
         perceivedEffort: 1,
-        newWeek: !isDateInThisWeek(new Date(workouts[workouts.length-1].date))
+        newWeek: workouts.length > 0 ? !isDateInThisWeek(new Date(workouts[workouts.length-1].date)) : false
     });
 
     useEffect(() => {
@@ -46,6 +46,7 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
              clearCurrent();
          } else {
             addWorkout(newWorkout);
+            methodCalled("Workout has been added");
          }
          showTheForm(); 
      }
@@ -57,17 +58,7 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
 
         <div className="labelinputcontainer">
             <label htmlFor='name'>Name:</label>
-            {/*}
-            <input 
-                type='name'
-                placeholder='Name'
-                name='name'
-                id='name'
-                value={name}
-                onChange={onChange}
-                required
-                />
-  {*/}
+            
                 <select name='name' value={name} onChange={onChange}>
                     <option>Cycle</option>
                     <option>Run</option>
@@ -77,17 +68,7 @@ const WorkoutForum = ({ addWorkout, updateWorkout, clearCurrent, auth: { user },
 
         <div className="labelinputcontainer">
             <label htmlFor='perceivedEffort'>Perceived Effort:</label>
-            {/*}
-            <input 
-                type='perceivedEffort'
-                placeholder='perceivedEffort'
-                name='perceivedEffort'
-                id='perceivedEffort'
-                value={perceivedEffort}
-                onChange={onChange}
-                required
-                />
-{*/}
+           
             <select name='perceivedEffort' value={perceivedEffort} onChange={onChange}>
                 <option>1</option>
                 <option>2</option>

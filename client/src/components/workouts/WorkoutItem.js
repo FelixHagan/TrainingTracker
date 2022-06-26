@@ -8,6 +8,8 @@ const WorkoutItem = ({ eachWorkout, setCurrent, deleteWorkout, clearCurrent }) =
 
   const [showForm, setShowForm] = useState(false);
 
+  const [checkDelete, setCheckDelete] = useState(false);
+
     const { _id, name, description, perceivedEffort, date } = eachWorkout;
 
     const displayDate = (date) => {
@@ -49,8 +51,17 @@ const WorkoutItem = ({ eachWorkout, setCurrent, deleteWorkout, clearCurrent }) =
       </div>
        
       <div className='buttoncontainer'>
-        {showForm ? <button onClick={cancelUpdate}>Cancel</button> :  <button onClick={updateTheWorkout}>Update</button> }
-        <button onClick={deleteTheWorkout}>Delete</button>
+        {!checkDelete }
+        {showForm ? !checkDelete && <button onClick={cancelUpdate}>Cancel</button> :  !checkDelete && <button onClick={updateTheWorkout}>Update</button> }
+        {checkDelete ? !showForm && (<div>
+          <p>Are you sure?</p>
+          <button onClick={deleteTheWorkout}>Yes</button>
+          <button  onClick={() => setCheckDelete(!checkDelete)}>No</button>
+        </div>) : 
+          !showForm && <button onClick={() => setCheckDelete(!checkDelete)}>Delete</button>
+        }
+        
+        
       </div>
       
     </div>

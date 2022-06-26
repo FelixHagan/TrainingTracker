@@ -51,6 +51,11 @@ ul {
   flex-wrap: wrap;
 }
 
+.noworkoutmsg {
+  width: 100%;
+  text-align: center;
+}
+
 .workoutcontainer {
   box-shadow: 0.1em 0.1em 0.5em black;
   border-radius: 0.5em;
@@ -68,6 +73,17 @@ ul {
 @keyframes theWorkout {
   from {opacity: 0;}
   to {opacity: 1;}
+}
+
+.messagecontainer {
+  background-color: rgb(115, 255, 255);
+  flex-basis: 50%;
+  text-align: center;
+  box-shadow: 0.1em 0.1em 0.5em black;
+  padding: 1em;
+  color: black;
+  border-radius: 0.5em;
+  margin: 1em;
 }
 
 .workoutweek {
@@ -99,6 +115,8 @@ ul {
 
 .addbutton {
   text-align: center;
+  margin: 0 auto;
+  justify-content: center;
 }
 
 .addbutton button {
@@ -111,6 +129,22 @@ ul {
   width: 2em;
   height: 2em;
   font-size: 2em;
+}
+
+.scrollbutton {
+  display: flex;
+  justify-content: right;
+  flex-basis: 80%;
+  margin: 0.5em;
+}
+
+.scrollbutton button {
+  box-shadow: 0.1em 0.1em 0.5em black;
+  background-color: rgb(115, 255, 255);
+  border-radius: 0.5em;
+  border: 1px solid black;
+  color: black;
+  padding: 1em;
 }
 
 /*
